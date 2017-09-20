@@ -19,7 +19,7 @@ class ApiHandler() {
         fun getPosts(@Query("search") text: String) : Observable<List<Post>>
 
         @GET("users/{id}")
-        fun getAuthor(@Path("id") id: String) : Observable<Author>
+        fun getAuthor(@Path("id") id: Int) : Observable<Author>
     }
 
     private object APIClient {
@@ -40,8 +40,6 @@ class ApiHandler() {
 
     fun getPosts(text: String) : Observable<List<Post>> = apiClient.getPosts(text)
 
-    fun getAuthor(id: String) : Observable<Author> = apiClient.getAuthor(id)
-
-
+    fun getAuthor(id: Int) : Observable<Author> = apiClient.getAuthor(id)
 
 }

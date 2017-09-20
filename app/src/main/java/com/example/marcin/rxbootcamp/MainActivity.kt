@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.jakewharton.rxbinding2.widget.textChanges
 import kotlinx.android.synthetic.main.activity_main.*
-import java.util.*
 
 class MainActivity : AppCompatActivity(), Contracts.MainView {
 
@@ -16,6 +15,7 @@ class MainActivity : AppCompatActivity(), Contracts.MainView {
 
         presenter = MainViewPresenter(this)
         presenter.onViewCreated(editText.textChanges())
+
 
 
     }

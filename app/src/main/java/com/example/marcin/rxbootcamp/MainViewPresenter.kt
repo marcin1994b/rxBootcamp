@@ -17,16 +17,14 @@ class MainViewPresenter(val view: Contracts.MainView) : Contracts.MainViewPresen
     override fun onViewCreated(observable: Observable<CharSequence>) {
         observable.debounce(500, TimeUnit.MILLISECONDS)
                 .subscribeOn(Schedulers.io())
-                .subscribeBy(
-                        onNext = { apiHandler.getPosts(it.toString()).subscribe()}
-                )
-                .
-/*
-        apiHandler.getPosts("bruno")
-                .subscribeOn(Schedulers.io())
-                .subscribeBy {
-                    println(it)
-                }*/
+                .map { it.toString() }
+                .doOnNext { println(it) }
+                .switchMap { apiHandler.getPosts(it) }
+                .flatMapIterable { it }
+                //.doOnNext { println(it.author) }
+                //.switchMap { apiHandler.getAuthor(it.author) }
+                .subscribeBy { println(it) }
+
     }
 
 }
